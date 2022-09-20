@@ -1,0 +1,20 @@
+\begin{itemize}[<+->]
+	\item Beamer-Folien
+	\item komplexere Befehle
+	\item Hilfs-Dateien schreiben/lesen
+\end{itemize}
+
+\only<4,5>{
+\begin{figure}
+\only<4>{
+	\minislide{\pagenumberdefine}
+		{sec:define}
+}\only<5>{
+	\minislide{\pagenumberadvanced}
+		{sec:advanced}
+}
+	\caption{Link mit Vorschau}
+	\label{fig:minislide}
+\end{figure}
+\addsectionlabelandpagenumbernext{sec:advanced}{\pagenumberadvanced}
+}

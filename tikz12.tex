@@ -1,0 +1,6 @@
+
+\begin{tikzpicture}[scale=.6]
+	\drawgrid{-2.5}{-2.5}{2.5}{2.5}
+	\draw[thick] (0, 0) circle [radius=1];
+	\draw[thick, red] plot[domain=0:360, samples=40] ({cos(\x)*1.5},{0.5+sin(\x)*0.5});
+\end{tikzpicture}

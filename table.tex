@@ -1,0 +1,18 @@
+\begin{frame}[fragile]
+\begin{multicols}{2}
+\centering
+\begin{overlayarea}{\resultwidth\textwidth}{.8\textheight}
+	\only<+>{\input{table1.tex}}
+	\only<+>{\input{table12.tex}}
+	\only<+>{\input{table1.tex}}
+	\only<+>{\input{table123.tex}}
+\end{overlayarea}
+\begin{overlayarea}{.5\textwidth}{.8\textheight}
+	\vspace{-1.5em}
+	\only<1>{\lstinputlisting{table1.tex}}
+	\only<2>{\lstinputlisting{table12.tex}}
+	\only<3>{\lstinputlisting{table1.tex}}
+	\only<4>{\lstinputlisting{table123.tex}}
+\end{overlayarea}
+\end{multicols}
+\end{frame}

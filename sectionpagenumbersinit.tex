@@ -1,0 +1,41 @@
+%dummy definitions for section page numbers
+\def \pagenumberadvanced {30}
+\def \pagenumberdefine {30}
+\def \pagenumberdwarven {30}
+
+%file that will contain sectionnumber definitions the import here is
+%	the output from the file of the last compilation
+\input{sectionpagenumbers}
+%written in the format \newcommand\sectionpagenumber…{…}, where the section labels are defined
+\newwrite\sectionpagenumbers
+\immediate\openout\sectionpagenumbers=sectionpagenumbers.tex
+\newcounter{beamerpagenumber}
+
+%the following two commands
+%create a label for the current page and
+%write out the current page number to the file sectionpagenumbers.tex
+\def\addsectionlabelandpagenumber#1#2{
+	\label<\value{beamerpauses}>{#1}
+	\immediate\write\sectionpagenumbers{\unexpanded{\def#2}{\thepage}}
+}
+%difference to the previous: this version adds one to the label's overlay indicator
+%this is sometimes useful because for reasons that are beyond me the link sometimes
+%shows the right version, but still leads to the overlay before the wanted
+\def\addsectionlabelandpagenumbernext#1#2{
+	\setcounter{beamerpagenumber}{\value{beamerpauses}}
+	\stepcounter{beamerpagenumber}
+	\label<\thebeamerpagenumber>{#1}
+	\immediate\write\sectionpagenumbers{\unexpanded{\def#2}{\thepage}}
+}
+
+\def\minislide#1#2{
+	\IfFileExists{./\jobname.old.pdf}{
+		\hyperlink{#2}{\includegraphics[page=#1,scale=.25]{\jobname.old.pdf}}
+	}{	%else
+		\GenericError{[mycode] }{Missing .old copy}%
+			{[mycode] File ./\jobname.old.pdf not found}%
+			{copy ./\jobname.pdf to ./\jobname.old.pdf and run again \MessageBreak
+				(just press <return> to get to ./\jobname.pdf initially) \MessageBreak
+				afterwards: always copy ./\jobname.pdf to its .old version to use minislides}%%%
+	}
+}

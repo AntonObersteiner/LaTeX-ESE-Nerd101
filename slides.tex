@@ -1,0 +1,57 @@
+\documentclass{beamer}
+\input{preamble.tex}
+\input{definitions.tex}
+\input{lstdef.tex}
+
+%thumbnail example in pagenumers.tex
+\input{sectionpagenumbersinit.tex}
+%old dwarven example
+\input{ODdefine.tex}
+\input{ODextraletters.tex}
+\usepackage{tipa}	% ipa characters for OD
+
+% \setbeamercovered{transparent}
+\renewcommand{\arraystretch}{1.2} %table line height
+\newcommand{\resultwidth}{.4}
+\newcommand{\resultwidthintro}{.5}
+
+\title{\LaTeX{}-Basics}
+\author{Anton Obersteiner}
+\subtitle{beim ESE-Nerd101}
+
+\begin{document}
+
+\demopagedoubleinput{intro.tex}{intro.lst.tex}{\resultwidthintro\textwidth}{}
+\demopagedoubleinput{tableofcontents.tex}{tableofcontents.lst.tex}{\resultwidthintro\textwidth}{}
+
+\section{Basics}
+\subsection{Text}
+\input{text.tex}
+\subsection{Mathe}
+\input{math.tex}
+
+\section{Verschiedenes}
+\subsection{Struktur}
+\subsubsection{Definitionen}
+\input{define.tex}
+\subsubsection{Input von Dateien}
+\input{input.tex}
+\subsubsection{Umgebungen}
+\input{table.tex}
+
+\subsection{Zeichnen}
+\input{tikz.tex}
+
+\section{Weiteres}
+\subsection{Was \LaTeX{} noch so kann}
+% \demopageinput{advanced.tex}{.5\textwidth}{style=myLaTeXstyleTiny}
+\demopageinput{pagenumbers.tex}{.5\textwidth}{style=myLaTeXstyleTiny}
+\subsubsection{Altzwergisch}
+\demopageinput{olddwarven.tex}{.5\textwidth}{style=myLaTeXstyleTiny}
+\subsection{Referenzen und Templates}
+\input{templates.tex}
+
+%close the file that get the section page number definitions
+\immediate\closeout\sectionpagenumbers
+
+\end{document}

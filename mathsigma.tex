@@ -1,0 +1,6 @@
+Die Fortpflanzung der Messunsicherheit $\sigma_{x_i}$ der Einflusswerte $x_i$ auf $\sigma_y$ mit $y = f(x_0, ..., x_n)$ berechnet sich nach {\sc Gauss} als $\sigma_y = $
+$$ |\nabla f(x_{...}) \cdot (\sigma_{x_{...}})| =
+\left|
+	\begin{pmatrix} \frac{\partial f(x_{...})}{\partial x_0} \\ \vdots \\ \frac{\partial f(x_{...})}{\partial x_n} \end{pmatrix} \cdot
+	\begin{pmatrix} \sigma_{x_0} \\ \vdots \\ \sigma_{x_n} \end{pmatrix}
+\right| = \sqrt{\sum_{i=0}^n {\left(\frac{\partial f(x_{...})}{\partial x_i} \cdot \sigma_{x_i}\right)}^2} $$

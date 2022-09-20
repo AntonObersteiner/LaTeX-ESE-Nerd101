@@ -1,0 +1,60 @@
+\newcommand{\demopagedoubleinput}[4]{
+	% #1 what file to render
+	% #2 what file to write
+	% #3 render minipage width
+	\begin{frame}
+	\begin{multicols}{2}
+		\begin{overlayarea}{#3}{.8\textheight}
+			\input{#1}
+		\end{overlayarea}
+	\columnbreak
+		\resizebox{\linewidth}{!}{
+			\begin{overlayarea}{\linewidth}{.8\textheight}
+				\lstinputlisting[#4]{#2}
+			\end{overlayarea}
+		}
+	\end{multicols}
+	\end{frame}
+}
+\newcommand{\demopageinput}[3]{
+	% #1 what file to render
+	% #2 render minipage width
+	\demopagedoubleinput{#1}{#1}{#2}{#3}
+}
+\newcommand{\demoinput}[1]{
+	% #1 what file to render
+	\input{#1} \pause
+	\lstinputlisting{#1}
+}
+\newenvironment{demoareas}{
+	\begin{multicols}{2}
+	\centering
+	\begin{overlayarea}{\resultwidth\textwidth}{.8\textheight}
+}{
+	\end{overlayarea}
+	\end{multicols}
+}
+\newcommand{\demoareasmiddle}{
+	\end{overlayarea}
+	\columnbreak
+	\begin{overlayarea}{.5\textwidth}{.8\textheight}
+}
+%shamelessly stolen from https://tex.stackexchange.com/questions/298133/using-lstinline-inside-a-new-command-or-environment#298151
+\NewDocumentCommand\demoline{v}{%
+	\scantokens{#1\noexpand} & \lstinline{#1} \\ %
+}
+\NewDocumentCommand\demo{v}{%
+	\scantokens{#1\noexpand} \\ \begin{center}
+		\lstinline{#1}
+	\end{center} %
+}
+
+\input{tikzdef.tex}
+
+%only helper commands so the tikz becomes readable
+\newcommand{\ellipseX}{cos(\x r)*1.5}
+\newcommand{\ellipseY}{0.5+sin(\x r)*0.5}
+\newcommand{\inverseX}[2]{((#1)/((#1)^2 + (#2)^2))}
+\newcommand{\inverseY}[2]{((#2)/((#1)^2 + (#2)^2))}
+\newcommand{\inverseellipseX}{\inverseX{\ellipseX}{\ellipseY}}
+\newcommand{\inverseellipseY}{\inverseY{\ellipseX}{\ellipseY}}

@@ -1,0 +1,22 @@
+\begin{frame}[fragile]
+\begin{tabular}{rl}
+\begin{overlayarea}{.3\textwidth}{.8\textheight}
+	\only<1,2>{\input{tikz1.tex}}
+	\only<3>{\input{tikz12.tex}}
+	\only<4>{\input{tikz123.tex}}
+	\only<5>{\input{tikz1234.tex}}
+	\only<6->{\input{tikz12345.tex}}
+\end{overlayarea}
+&
+\begin{overlayarea}{.65\textwidth}{.8\textheight}
+	\vspace{-1.5em}
+	\only<1,2>{\lstinputlisting[style=myLaTeXstyleTiny]{tikz1.tex}}
+	\only<2>{\lstinputlisting[style=myLaTeXstyleTiny]{tikzdef.tex}}
+	\only<3>{\lstinputlisting[style=myLaTeXstyleTiny]{tikz12.tex}}
+	\only<4>{\lstinputlisting[style=myLaTeXstyleTiny]{tikz123.tex}}
+	\only<5>{\lstinputlisting[style=myLaTeXstyleTiny]{tikz1234.tex}}
+	\only<6->{\lstinputlisting[style=myLaTeXstyleTiny]{tikz12345.tex}}
+	% \only<7>{\lstinline{tikz}-Doku als PDF sehr zu empfehlen}
+\end{overlayarea}
+\end{tabular}
+\end{frame}
