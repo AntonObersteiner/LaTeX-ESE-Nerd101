@@ -1,0 +1,21 @@
+OD_letters
+ddoc
+*.py
+labelreftest*
+lst*test*
+
+#latex auxillaries
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.bbl
+*.blg
+*.run.xml
+*.bcf
+*.vrb
