@@ -1,9 +1,18 @@
 TEX=pdflatex --shell-escape
 COPY=cp
 OPEN=xdg-open
+#TEXQUIET= > /dev/null
+
+inital:
+	$(MAKE) slides copy
+	$(MAKE) slides copy
+	$(MAKE) slides copy open
+
+next:
+	$(MAKE) slides copy open
 
 slides:
-	$(TEX) slides.tex
+	$(TEX) slides.tex $(TEXQUIET)
 
 copy:
 	$(COPY) slides.pdf slides.old.pdf
