@@ -3,6 +3,7 @@ ddoc
 *.py
 labelreftest*
 lst*test*
+xparsetest*
 
 #latex auxillaries
 *.aux
