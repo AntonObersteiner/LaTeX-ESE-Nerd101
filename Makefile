@@ -14,6 +14,9 @@ next:
 slides:
 	$(TEX) slides.tex $(TEXQUIET)
 
+article:
+	$(TEX) article.tex $(TEXQUIET)
+
 copy:
 	$(COPY) slides.pdf slides.old.pdf
 

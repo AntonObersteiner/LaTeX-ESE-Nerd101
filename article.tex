@@ -1,0 +1,176 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}             % \textcolor ab section Text-1
+\usepackage{amsmath}            % \text
+\usepackage{listings}           % \lstinline Anleitung section Mathe-2
+\usepackage[german]{babel}      % „ und “: \glqq und \grqq
+\usepackage{tikz}               % für Zeichnung
+\usepackage{hyperref}           % \url
+\usepackage{tipa}               % text IPA, used by ODextraletters
+\input{ODdefine}
+\input{ODextraletters}
+\input{lstdef}					% listings configuration
+
+\title{\LaTeX{}-Basics}
+\author{Anton}
+\date{Oktober 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Basics}
+\subsection{Text}
+Hier ein bisschen
+\textbf{Text},
+teils \emph{betont},
+teils \underline
+{unterstrichen}).
+
+Zeilenumbruch entweder
+durch eine leere Zeile
+oder durch `\\'.
+
+\textcolor{red}{Textfarbe}
+ist auch kein
+{\color{blue} Problem}.
+
+\subsection{Mathe}
+$ v = (x, y) $ \\
+$ |\vec{v}| = \sqrt{x^2 + y^2} $ \\
+$ \sqrt[3]{8} = 2 $ \\
+$ x_1 = 10^{-2}\text{m} $ \\
+$ \sum_{n=1}^\infty \frac{1}{2^n} = 1 $ \\
+$$ \sum_{n=1}^\infty \frac{1}{2^n} = 1 $$
+
+
+Baut das hier nach, testet die Effekte von einfachen Dollar und doppelten Dollar. Schlagt bekannte Symbole nach (z.B. in der Wikipedia: Liste Mathematischer Symbole), lasst unbekannte notfalls weg ($\zeta$ ist \textbackslash\lstinline+zeta+, $\prod$ \textbackslash\lstinline+prod+) Aufrechten Text kann man mit \textbackslash\lstinline+rm+ erzwingen.
+$$ \zeta(s)
+	= \sum_{n=1}^\infty \frac{1}{n^s}
+	= \prod_{p \in \text{Prim}} \frac{1}{1-p^{-s}}
+$$
+Stellt Fragen.
+
+Die Fortpflanzung der Messunsicherheit $\sigma_{x_i}$ der Einflusswerte $x_i$ auf $\sigma_y$ mit $y = f(x_0, ..., x_n)$ berechnet sich nach {\sc Gauss} als $\sigma_y = $
+$$ |\nabla f(x_{...}) \cdot (\sigma_{x_{...}})| =
+\left|
+	\begin{pmatrix} \frac{\partial f(x_{...})}{\partial x_0} \\ \vdots \\ \frac{\partial f(x_{...})}{\partial x_n} \end{pmatrix} \cdot
+	\begin{pmatrix} \sigma_{x_0} \\ \vdots \\ \sigma_{x_n} \end{pmatrix}
+\right| = \sqrt{\sum_{i=0}^n {\left(\frac{\partial f(x_{...})}{\partial x_i} \cdot \sigma_{x_i}\right)}^2} $$
+
+\section{Verschiedenes}
+\subsection{Eigene Befehle}
+Folgender Code kommt immer wieder vor und soll ein bisschen abstrahiert werden:
+\lstinline+$$ \frac{ \partial f(x_{...}) }{ \partial x_0 } $$+
+
+$$ \frac{ \partial f(x_{...}) }{ \partial x_0 } $$
+
+\newcommand{\partialdiff}[2]{ % {\name}[arg-count]
+	\frac{\partial #1}{\partial #2} % definition
+}
+$$ \partialdiff{ f(x_{...}) }{ x_0 } $$
+
+\hrule\vspace{1em}
+\glqq Alle Strukturen, die mehr als einmal vorkommen und alle Variablen werden separat definiert.\grqq{} -- meine Tante
+
+\subsection{Umgebungen}
+Die folgende Tabelle wird an den Anfang der Seite wandern:
+\begin{table}
+\begin{tabular}{r|l}
+	Umgebung & Sinn \\
+	\hline
+	{\tt tabular} & Form \\
+	{\tt table} & Kontext \\
+	{\tt figure} & Abb. \\
+	{\tt matrix} & Matrix \\
+	{\tt itemize} & Listen \\
+\end{tabular}
+	\label{tab:environments}
+	\caption{Einige Umgebungen}
+\end{table}
+
+Formatierte mathematische Formeln:
+\begin{align*}
+	\vec{v} &= (x, y) \\
+	a   &= \sqrt[3]{8} = 2 \\
+	x_1 &= 10^{-2}\text{m} &= 1\text{cm} \\
+\end{align*}
+
+\begin{figure}
+$$ \zeta(s)
+	= \sum_{n=1}^\infty \frac{1}{n^s}
+	= \prod_{p \in \text{Prim}} \frac{1}{1-p^{-s}}
+$$
+\caption{Eine Formel}
+\label{fig:zeta}
+\end{figure}
+
+\newcommand{\drawgrid}[4]{
+	%draw a background grid in a tikzpicture
+	%environment in the rectangle
+	%from (#1, #2) to (#3, #4)
+	\draw[style={help lines, color=blue!50}] (#1, #2) grid (#3, #4);
+	\draw (0, #2) -- (0, #4);
+	\draw (#1, 0) -- (#3, 0);
+}
+\newcommand{\ellipseX}{cos(\x r)*1.5}
+\newcommand{\ellipseY}{0.5+sin(\x r)*0.5}
+\newcommand{\inverseX}[2]{((#1)/((#1)^2 + (#2)^2))}
+\newcommand{\inverseY}[2]{((#2)/((#1)^2 + (#2)^2))}
+\newcommand{\inverseellipseX}{\inverseX{\ellipseX}{\ellipseY}}
+\newcommand{\inverseellipseY}{\inverseY{\ellipseX}{\ellipseY}}
+
+\subsection{Zeichnungen}
+\begin{figure}
+\begin{tikzpicture}[scale=1.6]
+	\drawgrid{-2.5}{-2.5}{2.5}{2.5}
+	\draw[thick] (0, 0) circle [radius=1];
+	\draw[thick, red] plot[domain=0:360, samples=40]
+		({cos(\x)*1.5},{0.5+sin(\x)*0.5});
+	\draw[thick, blue] plot[domain=-1.301:4.444,
+		samples=150] ({\inverseellipseX},
+		{\inverseellipseY});
+\end{tikzpicture}
+	\caption{ $E(x, y, z)$ }
+	\label{fig:ellipse}
+\end{figure}
+
+Verweise auf {\tt label} mit {\tt ref}: \\
+Siehe Abbildung \ref{fig:ellipse},
+	Tabelle \ref{tab:environments}
+
+
+\exampleentryDK{d\'aw.\-\sh{}y \gh{}\'y\sh{}.\-fa.\-g\`en}
+	{\ODlarge{da2w.s1y} \ODlarge{g1y2s1.fa.ge1n}}
+	{They blossom into a healthy young dwarf}
+
+\exampleentryDK{d\'ed.\-t\zh{}ez b\'or.\-mbez.\-\`ar nd\=em}
+	{\ODlarge{de2d.tz1ez} \ODlarge{bo2r.mbez.a1r} \ODlarge{nde3m}}
+	{I have written 10 books}
+
+\exampleentryDK{d\=el w\'af.\-es 7 g\'e\zh{}.\-t\sh{}ew.\-t\`o}
+	{\ODlarge{de3l} \ODlarge{wa2f.es} \ODlarge{7} \ODlarge{ge2z1.ts1ew.to1} }
+	{Seven rivers flow through the Ge\zh{}.t\sh{}ew}
+
+\exampleentryDK{d\=ew \Sh{}\'ef.\-\nh\gh{}ow.\-\`es t\'e\gh{}.\-or \zh{}ram.\-x\'ar.\-gys \gh{}\=ep}
+	{\ODlarge{de3w} \ODlarge{S1e2f.n1g1ow.e1s} \ODlarge{te2g1.or} \ODlarge{z1ram.xa2r.gys} \ODlarge{g1e3p}}
+	{The \Sh{}ef\nh\gh{}ows have developed their mapmaking for 100 years}
+
+\exampleentryDK{nzy.\-dl\'ym.\-xal \zh{}\'yw.\-ar ra\zh{}.\-nt\'aw}
+	{\ODlarge{nzy.dly2m.xal} \ODlarge{z1y2w.ar} \ODlarge{raz1.nta2w}}
+	{They will teach you everything you need}
+
+\begin{itemize}
+	\item[Slides] \url{https://tinyurl.com/ESELaTeX}
+	\item[TUD] Templates der Uni und verschiedener Lehrstühle
+	\item[TUD-OL] \url{https://tex.zih.tu-dresden.de} (Overleaf der Uni)
+	\item[SE] \url{https://tex.stackexchange.com} (Q\&A-Portal)
+	\item[OL] \url{https://overleaf.com} (Tipps und Editor)
+	\item[Tikz] \url{https://tikz.dev/}
+		(Zeichnungen $\to$ \hyperlink{tikz-final}{Slide})
+	\item[Mathe] \url{https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole}
+	\item[Symbole] \url{https://latex-programming.fandom.com/wiki/List_of_LaTeX_symbols}
+\end{itemize}
+
+\end{document}
+
