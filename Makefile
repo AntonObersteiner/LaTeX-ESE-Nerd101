@@ -23,6 +23,9 @@ copy:
 open:
 	$(OPEN) slides.pdf
 
+push:
+	scp slides.pdf quitte:public_html/LaTeX.pdf
+
 clean:
 	rm -f slides.pdf
 	rm -f *.aux *.fdb_latexmk *.fls *.log *.out *.synctex.gz *.toc *.nav *.snm *.bbl *.blg *.run.xml *.bcf *.vrb
