@@ -2,6 +2,7 @@
 	% #1 what file to render
 	% #2 what file to write
 	% #3 render minipage width
+	% #4 lst-style changes
 	\begin{frame}
 	\begin{multicols}{2}
 		\begin{overlayarea}{#3}{.8\textheight}
@@ -10,6 +11,26 @@
 	\columnbreak
 		\resizebox{\linewidth}{!}{
 			\begin{overlayarea}{\linewidth}{.8\textheight}
+				\lstinputlisting[#4]{#2}
+			\end{overlayarea}
+		}
+	\end{multicols}
+	\end{frame}
+}
+\newcommand{\demopagedoubleinputmeh}[5]{
+	% #1 what file to render
+	% #2 what file to write
+	% #3 render minipage width
+	% #4 lst-style changes
+	% #5 listing width factor
+	\begin{frame}
+	\begin{multicols}{2}
+		\begin{overlayarea}{#3}{.8\textheight}
+			\input{#1}
+		\end{overlayarea}
+	\columnbreak
+		\resizebox{\linewidth}{!}{
+			\begin{overlayarea}{#5\linewidth}{.8\textheight}
 				\lstinputlisting[#4]{#2}
 			\end{overlayarea}
 		}

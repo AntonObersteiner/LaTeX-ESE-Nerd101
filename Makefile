@@ -2,6 +2,8 @@ TEX=pdflatex --shell-escape
 COPY=cp
 OPEN=xdg-open
 #TEXQUIET= > /dev/null
+SERVER_COPY=rsync -avuP
+SERVER_PATH=quitte:public_html/LaTeX.pdf
 
 inital:
 	$(MAKE) slides copy
@@ -24,7 +26,7 @@ open:
 	$(OPEN) slides.pdf
 
 push:
-	scp slides.pdf quitte:public_html/LaTeX.pdf
+	$(SERVER_COPY) slides.pdf $(SERVER_PATH)
 
 clean:
 	rm -f slides.pdf
